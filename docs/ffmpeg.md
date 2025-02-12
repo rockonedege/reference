@@ -84,6 +84,7 @@ $ ffmpeg -i movie.webm movie.mp4
 `-r RATE` | 每秒帧率
 `-s WIDTHxHEIGHT` | 帧大小
 `-vn` | 没有视频
+`-crf` | 指定编码的质量，数值越大压缩越高，一般范围是 18-28
 
 ### 码率设置
 
@@ -116,6 +117,7 @@ $ ffmpeg -i movie.webm movie.mp4
 `-vol` | 以 256 的倍数更改音频音量，其中 256 = 100%(正常)音量。例如 512 = 200%
 `-newaudio` | 将新的音频流添加到当前输出流
 `-alang code` | 设置当前音频流的 ISO 639 语言代码(3 个字母)
+`-ac nTract` | 指定立体声通道数（n个声道）。例如 nTract = 2 即2个声道
 
 视频编辑
 ---
