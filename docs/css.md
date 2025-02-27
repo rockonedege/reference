@@ -156,7 +156,7 @@ div {
 ```css
 #container {
   display: grid;
-s  grid: repeat(2, 60px) / auto-flow 80px;
+  grid: repeat(2, 60px) / auto-flow 80px;
 }
 #container > div {
   background-color: #8ca0ff;
@@ -1264,10 +1264,13 @@ CSS 函数
 ### calc()
 
 ```css
-width: calc(100% - 80px);
+div {
+  width: calc(100% - 30px);
+  height: calc(100% - 30px);
+}
 ```
 
-声明 CSS 属性值时执行一些计算
+[`calc()`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/calc) CSS 函数允许您在指定 CSS 属性值时执行计算
 
 ### clamp()
 
@@ -1468,6 +1471,35 @@ html {
 
 [点击我](#入门)页面会平滑滚动到入门
 
+### 修改浏览器自动填充 input 样式
+
+```css
+input[type="text"]:autofill {
+  box-shadow: 0 0 0 1000px #000 inset;
+  -webkit-text-fill-color: white;
+}
+```
+
+另见: [:autofill](https://developer.mozilla.org/en-US/docs/Web/CSS/:autofill)
+
+### 修改 input type="color" 样式
+<!--rehype:wrap-class=col-span-2 row-span-2-->
+
+```css
+input[type="color"] {
+  -webkit-appearance: none;
+  border: none;
+  width: 32px;
+  height: 32px;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+}
+```
+
 ### 忽略用作间距的换行符 \<br />
 
 ```css
@@ -1491,6 +1523,7 @@ br + br {
 html {
   box-sizing: border-box;
 }
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -1518,6 +1551,24 @@ html {
 ```
 
 上面示例设置了当前卡片灰色
+
+### `<textarea>`自动增加其高度
+
+```css
+textarea {
+  form-sizing: normal
+}
+```
+
+### 定义容器的长宽比
+
+```css
+div {
+  aspect-ratio: 1/1 
+}
+```
+
+属性 [aspect-ratio](https://developer.mozilla.org/zh-CN/docs/Web/CSS/aspect-ratio) 可以非常容易的定义一个容器的长宽比
 
 ### 使用 unset 而不是重置所有属性
 
@@ -1557,6 +1608,7 @@ body {
 这样文本元素可以很容易地从 `body` 继承
 
 ### 使用图像作为光标
+<!--rehype:wrap-class=col-span-2-->
 
 ```css
 div {
@@ -1592,17 +1644,6 @@ div {
 ```
 
 多行文本截断到特定的行数，末尾显示省略号 _(...)_
-
-### 计算函数
-
-```css
-div {
-  width: calc(100% - 30px);
-  height: calc(100% - 30px);
-}
-```
-
-[`calc()`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/calc) CSS 函数允许您在指定 CSS 属性值时执行计算
 
 ### 粘性定位元素
 
@@ -1676,16 +1717,6 @@ div {
 <!--rehype:className=wrap-text -->
 
 通过样式来控制一个元素 `div` 是否可以编辑
-
-### 定义容器的长宽比
-
-```css
-div {
-  aspect-ratio: 1/1 
-}
-```
-
-属性 [aspect-ratio](https://developer.mozilla.org/zh-CN/docs/Web/CSS/aspect-ratio) 可以非常容易的定义一个容器的长宽比
 
 ### 等宽表格单元格
 
@@ -1900,6 +1931,42 @@ body {
 }
 ```
 
+### 图片对齐不变形
+
+```css
+img {
+  width: 200px;
+  height: 200px;
+  /** 确保图片按原始宽高比例进行缩放 */
+  object-fit: cover;
+  object-position: left top;
+  transition: 1s;
+}
+img:hover {
+  /** 指定图片显示的位置，结合鼠标移动+过渡动画 */
+  object-position: right bottom;
+}
+```
+
+### 多行截断，展示省略号
+
+```css
+.clamp {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+```
+
+`html` 文本超过 3 行将被截断，显示省略号...
+
+```html
+<p class="clamp">
+  展示多行文本，超过 3 行将被截断，显示省略号...
+</p>
+```
+
 ### 逗号分隔列表
 
 ```css
@@ -1909,6 +1976,16 @@ ul > li:not(:last-child)::after {
 ```
 
 使列表项看起来像一个真实的逗号分隔列表，使用 `:not()` 伪类，最后一项不会添加逗号
+
+### 表格中数字使用制表数字
+
+```css
+.revenue {
+    font-variant-numeric: tabular-nums;
+}
+```
+
+表格中一列数字列对其
 
 另见
 ---------
