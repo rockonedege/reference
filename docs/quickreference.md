@@ -80,9 +80,9 @@ npm run start # 监听 md 文件编译输出 HTML
 <!--rehype:class=home-card-->
 ```
 
-首页导航图标存放在 `scripts/assets` 目录中，如果你的备忘清单定义为 `docs/cron.md`，那么你的图标就定义为 `cron.svg` 存放到 `scripts/assets` 目录中，重新编译首页当行菜单就拥有了图标。
+首页导航图标存放在 `/assets` 目录中，如果你的备忘清单定义为 `docs/cron.md`，那么你的图标就定义为 `cron.svg` 存放到 `/assets` 目录中，重新编译首页当行菜单就拥有了图标。
 
-- 图标存放在 [`scripts/assets`](https://github.com/jaywcjlove/reference/blob/main/scripts/assets) 目录中
+- 图标存放在 [`/assets`](https://github.com/jaywcjlove/reference/tree/main/assets) 目录中
 - 图片名称与清单名称保持一致 `cron.md` -> `cron.svg` (注意大小写)
 - SVG 图标尺寸 `<svg height="1em" width="1em"`
 - SVG 图标颜色使用继承颜色值 `<svg fill="currentColor"`
@@ -91,7 +91,7 @@ npm run start # 监听 md 文件编译输出 HTML
 ### 首页提示配置
 
 ```markdown
-[Django](./docs/djiango.md)<!--rehype:style=background: rgb(12 75 51/var(\-\-bg\-opacity));&class=contributing-->
+[Django](./docs/django.md)<!--rehype:style=background: rgb(12 75 51/var(\-\-bg\-opacity));&class=contributing-->
 ```
 <!--rehype:className=wrap-text-->
 
@@ -104,13 +104,13 @@ class=tag&data-info=👆看看还缺点儿什么？
 上面示例将默认提示更改为： `👆看看还缺点儿什么？`
 
 ```markdown
-[Django](./docs/djiango.md)<!--rehype:style=background: rgb(12 75 51/var(\-\-bg\-opacity));&class=tag&data-lang=Python-->
+[Django](./docs/django.md)<!--rehype:style=background: rgb(12 75 51/var(\-\-bg\-opacity));&class=tag&data-lang=Python-->
 ```
 <!--rehype:className=wrap-text-->
 
 添加 `class=tag&data-lang=Python` 类名和参数，会在卡片右上角标记 _`Python`_
 
-### Command Help
+### 命令帮助
 
 ```bash
 Usage: refs-cli [output-dir] [--help|h]
@@ -135,14 +135,16 @@ Example:
 refs-cli@v0.0.1
 ```
 
-### Config
+### 配置 Config
+
+将 `.refsrc.json` 存放在项目的根目录下
 
 ```json
 {
   "title": "文档网站名称",
   "description": "{{description}} 网站说明",
   "keywords": "关键字,refs-cli,refs,cli",
-  "data-info": "👆需要你的参与",
+  "data-info": "👆 需要你的参与",
   "search": {
     "label": "搜索",
     "placeholder": "搜索备忘清单",
@@ -163,7 +165,69 @@ refs-cli@v0.0.1
 }
 ```
 
-将 `.refsrc.json` 存放在项目的根目录下
+支持 [JSON](https://www.json.org), [JSONC](https://github.com/microsoft/node-jsonc-parser), [JSON5](https://json5.org/), [YAML](https://yaml.org/), [TOML](https://toml.io), [INI](https://en.wikipedia.org/wiki/INI_file), [CJS](http://www.commonjs.org), [Typescript](https://www.typescriptlang.org/), 和 ESM 配置加载。
+
+### `TOML` 配置示例
+
+将 `.refsrc.toml` 存放在项目的根目录下
+
+```toml
+title = "Refs CLI 文档网站名称"
+description = "{{description}}. 网站说明"
+keywords = "关键字,reference,refs-cli,cli"
+data-info = "👆 需要你的参与"
+
+[search]
+  label = "搜索"
+  placeholder = "搜索备忘清单"
+  cancel = "取消"
+
+[editor]
+  label = "编辑"
+
+[github]
+  url = "<github url>"
+
+[home]
+  label = "首页"
+  url = "https://<你的网站>"
+
+footer = "<br />备案号：支持HTML字符串"
+license = "支持 HTML 字符串"
+```
+
+### 支持更多配置加载
+<!--rehype:wrap-class=col-span-2-->
+
+- `.refsrc`
+- `.refsrc.json`
+- `.refsrc.json5`
+- `.refsrc.jsonc`
+- `.refsrc.yaml`
+- `.refsrc.yml`
+- `.refsrc.toml`
+- `.refsrc.ini`
+- `.refsrc.js`
+- `.refsrc.ts`
+- `.refsrc.cjs`
+- `.refsrc.mjs`
+- `.config/refsrc`
+- `.config/refsrc.json`
+- `.config/refsrc.json5`
+- `.config/refsrc.jsonc`
+- `.config/refsrc.yaml`
+- `.config/refsrc.yml`
+- `.config/refsrc.toml`
+- `.config/refsrc.ini`
+- `.config/refsrc.js`
+- `.config/refsrc.ts`
+- `.config/refsrc.cjs`
+- `.config/refsrc.mjs`
+- `refs.config.js`
+- `refs.config.ts`
+- `refs.config.cjs`
+- `refs.config.mjs`
+<!--rehype:className=cols-3 style-none-->
 
 ### 环境变量
 
@@ -340,7 +404,15 @@ export const Student = (
 | `快捷键` | 说明    |
 <!--rehype:className=shortcuts-->
 
-列表添加 `<!--rehype:className=shortcuts-->` 样式类，展示快捷键样式。
+首列添加 `<!--rehype:className=shortcuts-->` 样式类，展示快捷键样式。
+
+| Key | value |
+| ---- | ---- |
+| 说明    | `快捷键` |
+| 说明    | `快捷键` |
+<!--rehype:className=shortcuts-last-->
+
+列尾添加 `<!--rehype:className=shortcuts-last-->` 样式类，展示快捷键样式。
 
 ### 代码行号
 
@@ -373,7 +445,7 @@ const school = <div>学校</div>;
 :- | -
 :- | -
 `<yel>` | <yel>黄色</yel>
-`<red>` | <yel>红色</yel>
+`<red>` | <red>红色</red>
 `<pur>` | <pur>紫色</pur>
 `<code>` 或 <code>\`\`</code> | <code>绿</code>`色`
 `<del>` 或 `~~删除~~` | <del>~~红色~~</del>
@@ -415,7 +487,8 @@ const school = <div>学校</div>;
 ---- | ----
 `<!--rehype:className=wrap-text-->` | 强制`换行`
 `<!--rehype:className=show-header-->` | 展示表格`表头`
-`<!--rehype:className=shortcuts-->` | `快捷键`样式
+`<!--rehype:className=shortcuts-->` | 首列`快捷键`样式
+`<!--rehype:className=shortcuts-last-->` | 尾列`快捷键`样式
 `<!--rehype:className=auto-wrap-->` | 隐藏表头强制小尺寸`自动换行`
 `<!--rehype:className=style-list-arrow-->` | 列表`箭头`样式展示表格
 `<!--rehype:className=style-list-->` | `列表`样式展示表格
@@ -423,6 +496,7 @@ const school = <div>学校</div>;
 `<!--rehype:className=style-none-->` | \<li> 没有标记样式
 `<!--rehype:className=style-timeline-->` | `时间轴`样式
 `<!--rehype:className=style-arrow-->` | `箭头`标记
+<!--rehype:className=left-align-->
 
 ### KaTeX 数学渲染
 
@@ -747,7 +821,7 @@ H2 部分
 ### Title 6
 ```
 
-在 `Title 1` 标题添加 `col-span-2` 和 `row-span-2` 占位类，使用 `空格` 间隔。
+[#](https://github.com/jaywcjlove/reference/blob/8fad19506946ae84139002ff367e2f2bca9b0696/docs/quickreference.md?plain=1#L774-L775)<!--rehype:target=__blank--> 在 `Title 1` 标题添加 `col-span-2` 和 `row-span-2` 占位类，使用 `空格` 间隔。
 
 表格
 ---
@@ -762,14 +836,14 @@ H2 部分
 `%A, %B %e, %Y` | Sunday, June 5, 2013
 `%b %e %a` | Jun 5 Sun
 
-#### Time
+#### Time (H4)
 
 :- | :-
 :- | :-
 `%H:%M` | 23:05
 `%I:%M %p` | 11:05 PM
 
-标题为 `H4` 的基本表格。
+[#](https://github.com/jaywcjlove/reference/blob/8fad19506946ae84139002ff367e2f2bca9b0696/docs/quickreference.md?plain=1#L806-L823)<!--rehype:target=__blank--> 标题为 `H4` 的基本表格。
 
 ### 快捷键
 
@@ -782,6 +856,9 @@ H2 部分
 `R` | Rectangle
 `O` | Oval
 `U` | Rounded
+<!--rehype:className=shortcuts-->
+
+[#](https://github.com/jaywcjlove/reference/blob/8fad19506946ae84139002ff367e2f2bca9b0696/docs/quickreference.md?plain=1#L827-L836)<!--rehype:target=__blank--> `<!--rehype:className=shortcuts-->`
 
 ### 展示标题
 
@@ -792,7 +869,7 @@ H2 部分
 `/` | `/html/body/div` | Root
 <!--rehype:className=show-header-->
 
-`<!--rehype:className=show-header-->`
+[#](https://github.com/jaywcjlove/reference/blob/ee03850619440e3700ed68ccc2ed21d3591a1490/docs/quickreference.md?plain=1#L839-L844)<!--rehype:target=__blank--> `<!--rehype:className=show-header-->`
 
 ### 列表样式展示表格
 
@@ -803,7 +880,7 @@ H2 部分
 `titleBarStyle.default` | 分别返回 _mac_ 或者 _win_ 的标准标题栏
 <!--rehype:className=style-list-->
 
-`<!--rehype:className=style-list-->`
+[#](https://github.com/jaywcjlove/reference/blob/ee03850619440e3700ed68ccc2ed21d3591a1490/docs/quickreference.md?plain=1#L850-L855)<!--rehype:target=__blank--> `<!--rehype:className=style-list-->`
 
 ### 列表箭头样式展示表格
 
@@ -814,7 +891,7 @@ H2 部分
 `titleBarStyle.default` | 分别返回 _mac_ 或者 _win_ 的标准标题栏
 <!--rehype:className=style-list-arrow-->
 
-`<!--rehype:className=style-list-arrow-->`
+[#](https://github.com/jaywcjlove/reference/blob/ee03850619440e3700ed68ccc2ed21d3591a1490/docs/quickreference.md?plain=1#L861-L866)<!--rehype:target=__blank--> `<!--rehype:className=style-list-arrow-->`
 
 ### 隐藏表头强制小尺寸自动换行
 
@@ -825,7 +902,7 @@ H2 部分
 `titleBarStyle.default` | 分别返回 _mac_ 或者 _win_ 的标准标题栏
 <!--rehype:className=auto-wrap-->
 
-`<!--rehype:className=auto-wrap-->`
+[#](https://github.com/jaywcjlove/reference/blob/ee03850619440e3700ed68ccc2ed21d3591a1490/docs/quickreference.md?plain=1#L872-L877)<!--rehype:target=__blank--> `<!--rehype:className=auto-wrap-->`
 
 ### 表格末尾列左对齐
 <!--rehype:wrap-class=col-span-2-->
@@ -836,7 +913,7 @@ H2 部分
 `./`  | Relative
 <!--rehype:className=show-header left-align-->
 
-默认表格末尾列`右对齐`，添加 `<!--rehype:className=left-align-->` 类让其`左对齐`
+[#示例](https://github.com/jaywcjlove/reference/blob/ee03850619440e3700ed68ccc2ed21d3591a1490/docs/quickreference.md?plain=1#L884-L888)<!--rehype:target=__blank--> 默认表格末尾列`右对齐`，添加 `<!--rehype:className=left-align-->` 类让其`左对齐`
 
 ### 强制 code 不换行
 
@@ -846,7 +923,7 @@ H2 部分
 | `adb reboot bootloader`           | Reboots the device into fastboot            |
 <!--rehype:className=show-header code-nowrap-->
 
-添加 `<!--rehype:className=code-nowrap-->` 注释
+[#](https://github.com/jaywcjlove/reference/blob/ee03850619440e3700ed68ccc2ed21d3591a1490/docs/quickreference.md?plain=1#L894-L898)<!--rehype:target=__blank-->  添加 `<!--rehype:className=code-nowrap-->`
 
 列表
 ---
@@ -856,6 +933,8 @@ H2 部分
 - Item 1
 - Item 2
 - Item 3
+
+[#示例](https://github.com/jaywcjlove/reference/blob/ee03850619440e3700ed68ccc2ed21d3591a1490/docs/quickreference.md?plain=1#L905-L909)<!--rehype:target=__blank-->
 
 ### 四列
 
@@ -869,7 +948,7 @@ H2 部分
 - Item 8
 <!--rehype:className=cols-4-->
 
-`<!--rehype:className=cols-4-->`
+[#](https://github.com/jaywcjlove/reference/blob/ee03850619440e3700ed68ccc2ed21d3591a1490/docs/quickreference.md?plain=1#L913-L921)<!--rehype:target=__blank--> `<!--rehype:className=cols-4-->`
 
 ### 列表步骤
 <!--rehype:wrap-class=row-span-2-->
@@ -893,7 +972,7 @@ H2 部分
   ```
 <!--rehype:className=style-timeline-->
 
-`<!--rehype:className=style-timeline-->`
+[#](https://github.com/jaywcjlove/reference/blob/ee03850619440e3700ed68ccc2ed21d3591a1490/docs/quickreference.md?plain=1#L928-L945)<!--rehype:target=__blank--> `<!--rehype:className=style-timeline-->`
 
 ### 没有标记
 
@@ -908,7 +987,7 @@ H2 部分
 - Item 9
 <!--rehype:className=cols-3 style-none-->
 
-`<!--rehype:className=cols-3 style-none-->`
+[#](https://github.com/jaywcjlove/reference/blob/ee03850619440e3700ed68ccc2ed21d3591a1490/docs/quickreference.md?plain=1#L951-L960)<!--rehype:target=__blank--> `<!--rehype:className=cols-3 style-none-->`
 
 ### 圆圈标记
 
@@ -917,7 +996,7 @@ H2 部分
 - Item 3
 <!--rehype:className=style-round-->
 
-`<!--rehype:className=style-round-->`
+[#](https://github.com/jaywcjlove/reference/blob/ee03850619440e3700ed68ccc2ed21d3591a1490/docs/quickreference.md?plain=1#L966-L969)<!--rehype:target=__blank--> `<!--rehype:className=style-round-->`
 
 ### 箭头标记
 
@@ -926,7 +1005,7 @@ H2 部分
 - Item 3
 <!--rehype:className=style-arrow-->
 
-`<!--rehype:className=style-arrow-->`
+[#](https://github.com/jaywcjlove/reference/blob/ee03850619440e3700ed68ccc2ed21d3591a1490/docs/quickreference.md?plain=1#L975-L978)<!--rehype:target=__blank--> `<!--rehype:className=style-arrow-->`
 
 H2 部分 - 5列效果展示
 ---
@@ -938,6 +1017,8 @@ H2 部分 - 5列效果展示
 ```
 ...
 ```
+
+[#示例](https://github.com/jaywcjlove/reference/blob/8ae69f23860c1854a81aeceb81a6cc0bc0998fc4/docs/quickreference.md?plain=1#L1012-L1021)<!--rehype:target=__blank-->
 
 ### Two
 
@@ -973,7 +1054,7 @@ H3 部分 - 占位效果展示
 ...合并两行
 ```
 
-`<!--rehype:wrap-class=row-span-2-->`
+[#](https://github.com/jaywcjlove/reference/blob/ee03850619440e3700ed68ccc2ed21d3591a1490/docs/quickreference.md?plain=1#L1020-L1027)<!--rehype:target=__blank--> `<!--rehype:wrap-class=row-span-2-->`
 
 ### col-span-2
 <!--rehype:wrap-class=col-span-2-->
@@ -982,7 +1063,7 @@ H3 部分 - 占位效果展示
 ...合并两列
 ```
 
-`<!--rehype:wrap-class=col-span-2-->`
+[#](https://github.com/jaywcjlove/reference/blob/ee03850619440e3700ed68ccc2ed21d3591a1490/docs/quickreference.md?plain=1#L1020-L1027)<!--rehype:target=__blank--> `<!--rehype:wrap-class=col-span-2-->`
 
 ### 红色标题
 <!--rehype:style=background:#e91e63;-->
@@ -991,7 +1072,7 @@ H3 部分 - 占位效果展示
 ...红色标题配置
 ```
 
-`<!--rehype:style=background:#e91e63;-->`
+[#](https://github.com/jaywcjlove/reference/blob/ee03850619440e3700ed68ccc2ed21d3591a1490/docs/quickreference.md?plain=1#L1038-L1043)<!--rehype:target=__blank-->  `<!--rehype:style=background:#e91e63;-->`
 
 ### 黄色标题
 <!--rehype:style=background:#d7a100;-->
@@ -1000,18 +1081,16 @@ H3 部分 - 占位效果展示
 ...黄色标题配置
 ```
 
-`<!--rehype:style=background:#d7a100;-->`
+[#](https://github.com/jaywcjlove/reference/blob/ee03850619440e3700ed68ccc2ed21d3591a1490/docs/quickreference.md?plain=1#L1047-L1052)<!--rehype:target=__blank--> `<!--rehype:style=background:#d7a100;-->`
 
 ### col-span-3
 <!--rehype:wrap-class=col-span-3-->
 
-```
-...
-```
+... [#示例](https://github.com/jaywcjlove/reference/blob/ee03850619440e3700ed68ccc2ed21d3591a1490/docs/quickreference.md?plain=1#L1056-L1061)<!--rehype:target=__blank--> 三列合并
 
 ### 卡片子项
 
-每个部分可以有以下子项：
+[#示例](https://github.com/jaywcjlove/reference/blob/ee03850619440e3700ed68ccc2ed21d3591a1490/docs/quickreference.md?plain=1#L1063-L1077)<!--rehype:target=__blank--> 每个部分可以有以下子项：
 
 #### H4 子标题
 
@@ -1029,13 +1108,15 @@ H3 部分 - 占位效果展示
 
 每个盒子(卡片)都是一个 `H3` 部分。 盒子将包含 `H3` 自身内的所有东西。
 
-这是一个包含段落的基本部分。
+[#示例](https://github.com/jaywcjlove/reference/blob/ee03850619440e3700ed68ccc2ed21d3591a1490/docs/quickreference.md?plain=1#L1079-L1083)<!--rehype:target=__blank--> 这是一个包含段落的基本部分
 
 ### H3 部分背景颜色
-<!--rehype:wrap-style=background: #1b5064;-->
+<!--rehype:wrap-style=background: #1e7da173;-->
 
 ```markdown
 注释配置：
-`<!--rehype:wrap-style=background: #1b5064;-->`
+`<!--rehype:wrap-style=background: #1e7da173;-->`
 ```
 <!--rehype:className=wrap-text -->
+
+[#示例](https://github.com/jaywcjlove/reference/blob/ee03850619440e3700ed68ccc2ed21d3591a1490/docs/quickreference.md?plain=1#L1085-L1087)<!--rehype:target=__blank-->
